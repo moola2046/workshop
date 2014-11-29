@@ -1,0 +1,35 @@
+<h1>Listing tasks</h1>
+
+<table class="table"> 
+  <thead>
+    <tr>
+      <th>Icon</th>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Done</th>
+      <th>Deadline</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |t| %>
+      <tr class="<%= t.color %> "> 
+        <td>
+          <%= image_tag(t.picture_url, :width => 30 ) if t.picture.present? %>
+        </td>
+        <td><%= t.name %></td>
+        <td><%= t.date %></td>
+        <td><%= t.done %></td>
+        <td><%= t.deadline %></td>
+        <td><%= link_to 'Show', t, class: "btn btn-info btn-primary btn-xs" %></td>
+        <td><%= link_to 'Edit', edit_task_path(t), class: "btn btn-success btn-primary btn-xs" %></td>
+        <td><%= link_to 'Destroy', t, class: "btn btn-danger btn-primary btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task', new_task_path %>
